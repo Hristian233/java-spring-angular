@@ -1,0 +1,98 @@
+<section
+  class="search-banner text-white py-3 form-arka-plan"
+  id="search-banner"
+>
+  <div class="container">
+    <form [formGroup]="searchForm" (submit)="searchBook()">
+      <div class="row">
+        <div class="col-md-12 remove-padding">
+          <div class="card">
+            <h3 class="search-h">Бързо търсене</h3>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Търси по заглавие"
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Търси по автор"
+                      formControlName="author"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <select class="custom-select" formControlName="university">
+                      <option selected value="">Университет</option>
+                      <option
+                        *ngFor="let univeristy of universities"
+                        [ngValue]="univeristy"
+                      >
+                        {{ univeristy.fullName }}, гр. {{ univeristy.city }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <select class="custom-select" formControlName="category">
+                      <option selected value="">Специалност</option>
+
+                      <option
+                        *ngFor="let category of categories"
+                        [ngValue]="category"
+                      >
+                        {{ category.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <select class="custom-select" formControlName="language">
+                      <option selected value="">Език</option>
+
+                      <option
+                        *ngFor="let language of languages"
+                        [ngValue]="language"
+                      >
+                        {{ language.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-12">
+                  <button class="btn btn-primary btn-sm mr-1" type="submit">
+                    Търсене
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    type="submit"
+                    routerLink="/search_book"
+                  >
+                    Подробно търсене
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" routerLink="/">Cars</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/search_book">Подробно търсене</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/add_car">Пусни обява</a>
+      </li>
+    </ul>
+    <ul *ngIf="!isUserAuthenticated" class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Влез</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register">Регистрирай се</a>
+      </li>
+    </ul>
+    <ul *ngIf="isUserAuthenticated" class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/book_requests"
+          >Запитвания
+          <!-- <span class="badge badge-notify">{{ notificationsCount }}</span> -->
+        </a>
+      </li>
+      <li class="">
+        <div class="dropdown">
+          <!--Trigger-->
+          <a
+            class="btn-floating btn-lg black dropdown-toggle user"
+            type="button"
+            id="dropdownMenu3"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >{{ userName }}</a
+          >
+          <br />
+          <!--Menu-->
+          <div class="dropdown-menu dropdown-primary dropdown-menu-right">
+            <a class="dropdown-item" routerLink="profile"
+              ><i class="fas fa-user-circle"></i> Профил</a
+            >
+            <a class="dropdown-item" (click)="logout()" routerLink="/"
+              ><i class="fas fa-sign-out-alt"></i> Изход</a
+            >
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

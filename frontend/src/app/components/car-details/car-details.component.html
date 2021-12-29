@@ -1,0 +1,169 @@
+<div class="container bootdey" *ngIf="bookToDisplay">
+  <div class="col-md-12">
+    <section class="panel">
+      <div class="panel-body row">
+        <div class="col-md-6">
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <ol class="carousel-indicators">
+              <li
+                *ngFor="let image of bookToDisplay.images; let i = index"
+                data-target="#carouselExampleIndicators"
+                data-slide-to="i"
+                class="active"
+              ></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  class="d-block w-100"
+                  [src]="bookToDisplay.images[0]"
+                  alt="First slide"
+                  width="200px"
+                  height="500px"
+                />
+              </div>
+              <div *ngIf="bookToDisplay?.images?.length > 1">
+                <div
+                  class="carousel-item"
+                  *ngFor="let image of bookToDisplay.images | slice: 1"
+                >
+                  <img
+                    class="d-block w-100"
+                    [src]="image"
+                    alt="Second slide"
+                    width="200px"
+                    height="500px"
+                  />
+                </div>
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carouselExampleIndicators"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carouselExampleIndicators"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h4 class="pro-d-title">
+            <h2>{{ bookTitle }}</h2>
+          </h4>
+          <p>
+            {{ bookToDisplay.description }}
+          </p>
+          <div class="product_meta">
+            <span class="posted_in">
+              <strong>Специалност:</strong>
+              <span rel="tag">{{
+                bookToDisplay.category ? bookToDisplay.category.name : ""
+              }}</span></span
+            >
+            <span class="posted_in">
+              <strong>Университет:</strong>
+              <span rel="tag">{{
+                bookToDisplay.university
+                  ? bookToDisplay.university.fullName
+                  : ""
+              }}</span></span
+            >
+            <span class="posted_in">
+              <strong>Език:</strong>
+              <span rel="tag">{{
+                bookToDisplay.language ? bookToDisplay.language.name : ""
+              }}</span></span
+            >
+          </div>
+          <div class="m-bot15">
+            <strong>Цена : </strong>
+            <span>{{ bookToDisplay.price }} лева</span>
+          </div>
+          <br />
+          <p>
+            <button
+              class="btn btn-round btn-danger"
+              (click)="openBuyModal(content)"
+              type="button"
+              *ngIf="isAuthenticated"
+            >
+              Купи
+            </button>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <form [formGroup]="submitForm" (submit)="sendBookRequest()">
+    <div class="modal-header">
+      <h4 class="modal-title">Пускане на заявка за учебник</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>
+        Моля, изпратете вашата контактна информация и изчакайте подателя на
+        обявата да се свърже с вас. Междувременно ние ще свалим обявата от
+        сайта.
+      </p>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >Контактна информация:
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Например: телефонен номер, фейсбук профил, имейл адрес..."
+          formControlName="info"
+        />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" type="submit">
+        Потвърди
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="modal.close('Close click')"
+      >
+        Отказ
+      </button>
+    </div>
+  </form>
+</ng-template>

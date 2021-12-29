@@ -1,0 +1,127 @@
+<div class="container mb-5">
+  <br />
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px">
+      <h4 class="card-title mt-3 text-center">Регистрирай се</h4>
+      <p class="text-center">Напълно безплатно</p>
+
+      <form [formGroup]="registerForm" (submit)="register()">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            class="form-control"
+            placeholder="Име"
+            type="text"
+            formControlName="name"
+          />
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input
+            class="form-control"
+            placeholder="Фамилия"
+            type="text"
+            formControlName="lastName"
+          />
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+          <input
+            id="email"
+            class="form-control"
+            placeholder="Имейл адрес*"
+            type="email"
+            formControlName="email"
+          />
+        </div>
+        <div
+          *ngIf="
+            !registerForm.get('email').valid &&
+            registerForm.get('email').touched
+          "
+          class="errors-left-align errors error"
+        >
+          Невалиден имейл!
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+          </div>
+
+          <input
+            class="form-control"
+            placeholder="Тел. номер"
+            type="text"
+            formControlName="phone"
+          />
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input
+            class="form-control"
+            placeholder="Парола*"
+            type="password"
+            formControlName="password"
+          />
+        </div>
+        <div
+          *ngIf="
+            registerForm.get('password').touched &&
+            registerForm.get('password').invalid
+          "
+          class="errors"
+        >
+          Паролата трябва да съдържа поне 6 символа
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input
+            class="form-control"
+            placeholder="Повтори парола*"
+            type="password"
+            formControlName="repeatPassword"
+          />
+        </div>
+        <div
+          *ngIf="
+            registerForm.get('repeatPassword').touched &&
+            registerForm.get('password').value !=
+              registerForm.get('repeatPassword').value
+          "
+          class="errors-left-align errors error"
+        >
+          Паролите не съвпадат
+        </div>
+        <div class="input-group">
+          <button
+            [disabled]="!registerForm.valid"
+            type="submit"
+            class="btn btn-primary btn-block"
+          >
+            Регистрирай се
+          </button>
+        </div>
+
+        <p class="text-center">
+          Вече си регистриран? <a routerLink="/login">Влез</a>
+        </p>
+      </form>
+    </article>
+  </div>
+  <!-- card.// -->
+</div>
+<!--container end.//-->
+
+<br />
