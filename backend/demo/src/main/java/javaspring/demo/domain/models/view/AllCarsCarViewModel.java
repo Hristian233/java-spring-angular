@@ -9,6 +9,8 @@ public class AllCarsCarViewModel {
 
     private BigDecimal price;
 
+    private String image;
+
     private AllCarsCarViewModel(){
 
     }
@@ -35,5 +37,13 @@ public class AllCarsCarViewModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
