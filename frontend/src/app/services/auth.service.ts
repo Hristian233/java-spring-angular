@@ -26,18 +26,19 @@ export class AuthService {
   }
 
   getIsAuth() {
-    return true; // fix later
+    // return this.isAuthenticated;
+    return true;
   }
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
 
-  login(email: string, password: string) {
-    const authData: LoginData = { email, password };
+  login(username: string, password: string) {
+    const authData: LoginData = { username, password };
 
     return this.http.post<{ token: string }>(
-      `${this.baseEndpoint}/api/users/login`,
+      `${this.baseEndpoint}/login`,
       authData
     );
   }
@@ -63,23 +64,8 @@ export class AuthService {
     return jwt_decode(jwt);
   }
 
-  createUser(
-    name: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    password: string,
-    passwordRepeat: string
-  ): Observable<any> {
-    const authData: AuthData = {
-      name,
-      lastName,
-      email,
-      phone,
-      password,
-      passwordRepeat,
-    };
-    return this.http.post(`${this.baseEndpoint}/api/users/register`, authData);
+  createUser(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseEndpoint}/users/register`, formData);
   }
 
   logout() {

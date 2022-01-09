@@ -32,7 +32,7 @@ export class SearchCarComponent implements OnInit {
     });
   }
 
-  searchBook() {
+  searchCar() {
     let book = this.createSearchObject();
 
     this.carService.searchCar(book).subscribe(

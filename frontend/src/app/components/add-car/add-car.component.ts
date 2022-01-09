@@ -48,9 +48,7 @@ export class CarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
-  addBook() {
-    console.log(this.carForm.value);
-
+  addCar() {
     this.carService.addNewCar(this.carForm.value).subscribe(
       (res) => {
         this.alertService.sendMessage(res.message, AlertType.Success);

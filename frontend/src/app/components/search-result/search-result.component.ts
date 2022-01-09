@@ -23,11 +23,11 @@ export class SearchResultComponent implements OnInit {
 
   setDisplayData(arr) {
     if (arr) {
-      this.dataToDisplay = arr.filter((el) => el.showOnMarket == true);
+      this.dataToDisplay = arr;
     }
   }
 
   redirectToDetailView(id: string) {
-    this.router.navigate(['/book_details', id]);
+    this.router.navigate([`/cars/details/${id}`]);
   }
 }

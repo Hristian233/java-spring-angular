@@ -11,9 +11,7 @@ export class CarService {
   constructor(private http: HttpClient, @Inject('env') private environment) {}
 
   getCarById(id: any): Observable<any> {
-    return this.http.get<CarModel[]>(
-      `${this.baseEndpoint}/api/car/find_by_id/` + id
-    );
+    return this.http.get<CarModel[]>(`${this.baseEndpoint}/cars/details/` + id);
   }
 
   getCars(): Observable<CarModel[]> {

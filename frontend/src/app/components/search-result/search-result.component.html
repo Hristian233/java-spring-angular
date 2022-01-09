@@ -10,16 +10,12 @@
       >
         <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of dataToDisplay">
           <div class="card h-100">
-            <a routerLink="/book_details/{{ item._id }}"
-              ><img
-                class="card-img-top"
-                [src]="item.images[0]"
-                width="200"
-                height="350"
+            <a routerLink="/cars/details/{{ item.id }}"
+              ><img class="card-img-top" [src]="item.image"
             /></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a routerLink="/book_details/{{ item._id }}">{{ item.name }}</a>
+                <a routerLink="/cars/details/{{ item.id }}">{{ item.name }}</a>
               </h4>
               <h5>{{ item.price }} лв.</h5>
               <p class="card-text">
@@ -39,7 +35,7 @@
               <button
                 type="button"
                 class="btn btn-primary btn-lg"
-                (click)="redirectToDetailView(item._id)"
+                (click)="redirectToDetailView(item.id)"
               >
                 Виж детайли
               </button>

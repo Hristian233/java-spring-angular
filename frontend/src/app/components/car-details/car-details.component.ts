@@ -15,13 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./car-details.component.less'],
 })
 export class CarDetailsComponent implements OnInit {
-  bookToDisplay: CarModel;
-  bookTitle: string = '';
-  bookObject = {
-    bookId: 'bookId',
-    buyerId: 'buyerId',
-    info: 'blabla',
-  };
+  carToDisplay: CarModel;
   submitForm: FormGroup;
   isAuthenticated: boolean;
 
@@ -42,8 +36,7 @@ export class CarDetailsComponent implements OnInit {
 
     this.carService.getCarById(id.toString()).subscribe(
       (res) => {
-        this.bookToDisplay = res;
-        this.capitalizeFirstLetterOnly(res.name);
+        this.carToDisplay = res;
       },
       (err) => {
         this.alertService.sendMessage(err.error.message, AlertType.Error);
@@ -60,8 +53,6 @@ export class CarDetailsComponent implements OnInit {
   }
 
   sendBookRequest() {
-    let bookObject = this.generateBookObject();
-
     // this.carService.createNewRequest(bookObject).subscribe(
     //   (res) => {
     //     this.alertService.sendMessage(res.message, AlertType.Success);
@@ -75,27 +66,9 @@ export class CarDetailsComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  generateBookObject() {
-    // return {
-    //   bookId: this.bookToDisplay._id,
-    //   info: this.submitForm.controls.info.value
-    //     ? this.submitForm.controls.info.value
-    //     : null,
-    //   buyerId: localStorage.getItem('userId'),
-    //   sellerId: this.bookToDisplay.sellerId,
-    //   bookName: this.bookToDisplay.name,
-    // };
-  }
-
-  openBuyModal(content) {
-    this.modalService.open(content, { centered: true, size: 'lg' });
-  }
-
-  capitalizeFirstLetterOnly(str: any): void {
-    str = str.split('');
-    str[0] = str[0].toUpperCase();
-    this.bookTitle = str.join('');
-  }
+  // openBuyModal(content) {
+  //   this.modalService.open(content, { centered: true, size: 'lg' });
+  // }
 
   ngOnDestroy() {}
 }

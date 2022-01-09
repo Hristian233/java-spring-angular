@@ -12,7 +12,7 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./home-page.component.less'],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  carsToDisplay: CarModel[];
+  carsToDisplay: boolean;
   carsObservable: Subscription;
 
   constructor(
@@ -23,12 +23,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.carsObservable = this.carService.getCars().subscribe(
-      (res) => {
-        this.carsToDisplay = res;
+      (res: any) => {
+        this.carService.searchResults = res;
+        this.carsToDisplay = true;
       },
       (err) => {
         this.alertService.sendMessage(
-          'Грешка при зареждането на учебници!',
+          'Грешка при зареждането на обяви!',
           AlertType.Error
         );
       }
@@ -36,7 +37,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   redirectToDetailView(id: string) {
-    this.router.navigate(['/book_details', id]);
+    this.router.navigate([`/cars/details/${id}`]);
   }
 
   ngOnDestroy() {

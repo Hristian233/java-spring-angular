@@ -11,18 +11,10 @@
           </div>
           <input
             class="form-control"
-            placeholder="Имейл адрес"
-            type="email"
-            formControlName="email"
+            placeholder="име"
+            type="username"
+            formControlName="username"
           />
-        </div>
-        <div
-          *ngIf="
-            !loginForm.get('email').valid && loginForm.get('email').touched
-          "
-          class="errors-left-align errors error"
-        >
-          Невалиден имейл!
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">

@@ -29,38 +29,27 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.authService
-      .createUser(
-        this.registerForm.controls.name.value,
-        this.registerForm.controls.lastName.value,
-        this.registerForm.controls.email.value,
-        this.registerForm.controls.phone.value,
-        this.registerForm.controls.password.value,
-        this.registerForm.controls.repeatPassword.value
-      )
-      .subscribe(
-        (res) => {
-          this.alertService.sendMessage(
-            AlertMessage.registerSuccess,
-            AlertType.Success
-          );
 
-          this.router.navigate(['/login']);
-        },
-        (err) => {
-          this.alertService.sendMessage(err.error.err, AlertType.Error);
-        }
-      );
+    this.authService.createUser(this.registerForm.value).subscribe(
+      (res) => {
+        this.alertService.sendMessage(
+          AlertMessage.registerSuccess,
+          AlertType.Success
+        );
+
+        this.router.navigate(['/login']);
+      },
+      (err) => {
+        this.alertService.sendMessage(err.message, AlertType.Error);
+      }
+    );
   }
 
   private initForm() {
     return this.formBuilder.group({
-      name: [''],
-      lastName: [''],
-      email: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6)]],
+      username: [''],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
     });
   }
 }

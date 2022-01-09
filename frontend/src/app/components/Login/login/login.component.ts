@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let email: string = this.loginForm.controls.email.value;
+    let username: string = this.loginForm.controls.username.value;
     let password: string = this.loginForm.controls.password.value;
 
-    this.authService.login(email, password).subscribe(
+    this.authService.login(username, password).subscribe(
       (res) => {
         this.authService.setAuthData(res);
 
@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
 
   private initForm() {
     return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 }

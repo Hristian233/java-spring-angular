@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'add_car', component: CarComponent, canActivate: [AuthGuard] },
   { path: 'search_book', component: SearchCarComponent },
   { path: 'search_results', component: SearchResultComponent },
-  { path: 'book_details/:id', component: CarDetailsComponent },
+  { path: 'cars/details/:id', component: CarDetailsComponent },
   {
     path: 'book_requests',
     component: CarRequestsComponent,
