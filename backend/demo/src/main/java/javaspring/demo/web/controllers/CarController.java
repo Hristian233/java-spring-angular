@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/cars")
 public class CarController {
     private final CarService carService;
@@ -53,15 +53,17 @@ public class CarController {
                 .collect(Collectors.toSet());
     }
 
-    @GetMapping(value = "/cars/details", produces = "application/json")
-    public CarDetailsViewModel carDetails(@RequestParam(name = "id") String id){
+    @GetMapping(value = "/details/{carID}", produces = "application/json")
+    public CarDetailsViewModel carDetails(@PathVariable(value = "carID") String id){
+
+        this.carService.viewCar(id);
         return this.modelMapper.map(
                 this.carService
                         .getCarById(id), CarDetailsViewModel.class);
     }
 
     @PostMapping("/create")
-    public ResponseEntity createCar(@ModelAttribute CarCreateBindingModel carCreateBindingModel) throws URISyntaxException {
+    public ResponseEntity createCar(@RequestBody CarCreateBindingModel carCreateBindingModel) throws URISyntaxException {
         boolean result = this.carService.createCar(
                 this.modelMapper
                         .map(carCreateBindingModel, CarServiceModel.class));
