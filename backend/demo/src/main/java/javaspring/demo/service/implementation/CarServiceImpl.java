@@ -31,8 +31,8 @@ public class CarServiceImpl implements CarService {
 
         try{
             this.carRepository.save(carEntity);
-        } catch (Exception e){
-            return false;
+        } catch (Exception exception){
+            throw exception;
         }
         return true;
     }
@@ -65,5 +65,18 @@ public class CarServiceImpl implements CarService {
         if (carEntity == null) return null;
 
         return this.modelMapper.map(carEntity, CarServiceModel.class);
+    }
+
+    @Override
+    public void viewCar(String id){
+        Car car = this.carRepository
+                .findById(id)
+                .orElse(null);
+
+        if(car == null) return;
+
+        car.setViews(car.getViews() + 1);
+
+        this.carRepository.save(car);
     }
 }
