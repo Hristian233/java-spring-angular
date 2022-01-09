@@ -1,26 +1,17 @@
 package javaspring.demo.domain.entities;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "cars")
 public class Car {
-    private String id;
-
-    private String name;
-
-    private String image;
-
-    private BigDecimal price;
-
-    private String description;
-
-    private long views;
-
-    public Car(){}
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -29,56 +20,20 @@ public class Car {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "id", nullable = false, unique = true,updatable = false)
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String id;
 
     @Column(name = "name", nullable = false)
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Column(name = "image", nullable = false)
-    public String getImage() {
-        return this.image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+    private String image;
 
     @Column(name = "price", nullable = false)
-    public BigDecimal getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+    private BigDecimal price;
 
     @Column(name = "description")
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    private String description;
 
     @Column(name = "views")
-    public long getViews() {
-        return this.views;
-    }
-
-    public void setViews(long views) {
-        this.views = views;
-    }
+    private long views;
 }
